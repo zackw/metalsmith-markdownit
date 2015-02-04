@@ -8,7 +8,7 @@ describe('metalsmith-markdown', function(){
   it('should convert markdown files', function(done){
     Metalsmith('test/fixtures/basic')
       .use(markdown({
-        smartypants: true
+        typographer: true
       }))
       .build(function(err){
         if (err) return done(err);
@@ -21,7 +21,7 @@ describe('metalsmith-markdown', function(){
     Metalsmith('test/fixtures/keys')
       .use(markdown({
         keys: ['custom'],
-        smartypants: true
+        typographer: true
       }))
       .build(function(err, files){
         if (err) return done(err);
