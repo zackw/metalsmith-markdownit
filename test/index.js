@@ -5,11 +5,9 @@ var Metalsmith = require('metalsmith');
 var markdown = require('..');
 
 describe('metalsmith-markdown', function(){
-  it('should convert markdown files', function(done){
+  it('should convert markdown files with no parameters', function(done){
     Metalsmith('test/fixtures/basic')
-      .use(markdown({
-        typographer: true
-      }))
+      .use(markdown())
       .build(function(err){
         if (err) return done(err);
         equal('test/fixtures/basic/expected', 'test/fixtures/basic/build');
@@ -17,15 +15,46 @@ describe('metalsmith-markdown', function(){
       });
   });
 
-  it('should allow a "keys" option', function(done){
-    Metalsmith('test/fixtures/keys')
-      .use(markdown({
-        keys: ['custom'],
-        typographer: true
-      }))
-      .build(function(err, files){
+  it('should convert markdown files with presets', function(done){
+    Metalsmith('test/fixtures/preset')
+      .use(markdown('default'))
+      .build(function(err){
         if (err) return done(err);
-        assert.equal('<p><em>a</em></p>\n', files['index.html'].custom);
+        equal('test/fixtures/preset/expected', 'test/fixtures/preset/build');
+        done();
+      });
+  });
+
+  it('should convert markdown files with options', function(done){
+    Metalsmith('test/fixtures/options')
+      .use(markdown({ html: true }))
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/options/expected', 'test/fixtures/options/build');
+        done();
+      });
+  });
+
+  it('should convert markdown files with preset and options combination', function(done){
+    Metalsmith('test/fixtures/combo')
+      .use(markdown('default', { typographer: true }))
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/combo/expected', 'test/fixtures/combo/build');
+        done();
+      });
+  });
+
+  it('should give access to markdown parser', function(done){
+    var md = markdown('zero');
+
+    md.parser.enable('emphasis');
+
+    Metalsmith('test/fixtures/parser')
+      .use(md)
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/parser/expected', 'test/fixtures/parser/build');
         done();
       });
   });
