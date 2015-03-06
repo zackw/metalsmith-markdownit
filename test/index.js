@@ -58,4 +58,18 @@ describe('metalsmith-markdown', function(){
         done();
       });
   });
+
+  it('should be able to use a plugin', function(done){
+    var md = markdown('default');
+
+    md.parser.use(require('markdown-it-abbr'));
+
+    Metalsmith('test/fixtures/plugin')
+      .use(md)
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/plugin/expected', 'test/fixtures/plugin/build');
+        done();
+      });
+  });
 });

@@ -12,6 +12,7 @@
   "devDependencies": {
     "mocha": "1.x",
     "metalsmith": "0.x",
-    "assert-dir-equal": "0.x"
+    "assert-dir-equal": "0.x",
+    "markdown-it-abbr": "^0.1"
   }
 }
