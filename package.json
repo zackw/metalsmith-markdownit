@@ -2,18 +2,18 @@
   "name": "metalsmith-markdownit",
   "description": "A Metalsmith plugin to convert markdown files.",
   "repository": "git://github.com/mayo/metalsmith-markdownit.git",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
     "debug": "~0.7.4",
-    "markdown-it": "~3.0.4"
+    "markdown-it": "^4.0.0"
   },
   "devDependencies": {
     "mocha": "1.x",
     "metalsmith": "0.x",
     "assert-dir-equal": "0.x",
-    "markdown-it-abbr": "^0.1"
+    "markdown-it-abbr": "^1.0.0"
   },
   "scripts": {
     "test": "mocha"
