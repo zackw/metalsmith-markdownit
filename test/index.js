@@ -46,12 +46,37 @@ describe('metalsmith-markdown', function(){
   });
 
   it('should give access to markdown parser', function(done){
+    var md = markdown('zero');
+    md.parser.enable('emphasis');
+
+    Metalsmith('test/fixtures/parser')
+      .use(md)
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/parser/expected', 'test/fixtures/parser/build');
+        done();
+      });
+  });
+
+  it('should expose the markdown parser via proxy', function(done){
     Metalsmith('test/fixtures/parser')
       .use(markdown('zero').enable('emphasis'))
       .build(function(err){
         if (err) return done(err);
         equal('test/fixtures/parser/expected', 'test/fixtures/parser/build');
         done();
+      });
+  });
+
+  it('should use plugins via the direct parser', function(done){
+    var md = markdown('default');
+    md.parser.use(require('markdown-it-abbr'));
+    Metalsmith('test/fixtures/plugin')
+      .use(md)
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/plugin/expected', 'test/fixtures/plugin/build');
+        done()
       });
   });
 
