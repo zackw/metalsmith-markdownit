@@ -63,7 +63,7 @@ metalsmith.use(md);
 The parser's `enable`, `disable`, `use` and `set` methods are proxied on the metalsmith plugin, so you may access them like so:
 
 ```js
-var markdown = require('metalsmith-multimarkdownit');
+var markdown = require('metalsmith-markdownit');
 
 metalsmith.use(markdown('zero', {html: true}).enable('emphasis', 'html_block', 'html_tag'))
 ```
@@ -71,7 +71,7 @@ metalsmith.use(markdown('zero', {html: true}).enable('emphasis', 'html_block', '
 You may provide a function to set the parser & renderer's environment on a per-page basis, should you need to:
 
 ```js
-var markdown = require('metalsmith-multimarkdownit');
+var markdown = require('metalsmith-markdownit');
 
 metalsmith.use(markdown('default').env(function(page){ return page; }))
 ```
