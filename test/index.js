@@ -89,4 +89,39 @@ describe('metalsmith-markdown', function(){
         done();
       });
   });
+
+  it('should be able to set the rendering environment per-page', function(done){
+    Metalsmith('test/fixtures/env-plugin')
+      .metadata({siteName: 'The test build'})
+      .use(markdown('default')
+           .env(function(page, metadata){ return {title: page.title, siteName: metadata.siteName}; })
+           .use(function(md){
+             md.inline.ruler.push('vars', function(state, silent){
+               var pos = state.pos,
+                   max = state.posMax;
+               if (state.src.charCodeAt(pos) !== '@'.charCodeAt(0)) { return false; }
+               while (pos < max) {
+                 pos++;
+                 if (state.md.utils.isSpace(state.src.charCodeAt(pos))){break;}
+               }
+               if (!silent) {
+                 var name = state.src.slice(state.pos + 1, pos),
+                     token = state.push('vars', '', 0);
+                 token.markup = "@" + name;
+                 token.content = state.env[name];
+               }
+               state.pos = pos;
+               return true;
+             });
+             md.renderer.rules['vars'] = function(tokens, id, options, env, self){
+               var token = tokens[id];
+               return token.content;
+             }
+           }))
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/env-plugin/expected', 'test/fixtures/env-plugin/build');
+        done();
+      })
+  })
 });
