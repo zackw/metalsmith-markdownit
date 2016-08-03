@@ -55,7 +55,7 @@ If you need access to markdown-it directly to enable features or use plugins, yo
 var markdown = require('metalsmith-markdownit');
 
 var md = markdown('zero', { html: true });
-md.parser.enable(['embpahsis', 'html_block', 'html_tag']);
+md.parser.enable(['emphasis', 'html_block', 'html_tag']);
 
 metalsmith.use(md);
 ```
