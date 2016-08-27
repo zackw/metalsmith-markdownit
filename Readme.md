@@ -2,7 +2,7 @@
 
 # metalsmith-markdownit
 
-A Metalsmith plugin to convert markdown files using markdown-it library.
+A Metalsmith plugin to convert markdown files using [markdown-it](https://github.com/markdown-it/markdown-it) library.
 
 This plugin is not one to one replacement for metalsmith-markdown. There are slight differences in how the underlying libraries behave, but I find I get better results with markdown-it. Markdown-it, however, does not support all GFM features.
 
