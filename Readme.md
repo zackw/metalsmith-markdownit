@@ -49,6 +49,23 @@ metalsmith.use(markdown('default', {
 }));
 ```
 
+If you want to control plugin behaviour, you can set options under the `plugin` key of the `options` object (these options are not passed to Markdown It):
+
+```js
+metalsmith.use(markdown('default', {
+  typographer: true,
+  html: true,
+  plugin: {
+    // options.plugin.pattern (string) - glob pattern. Defaults to '**/*@(md|markdown)'
+    pattern: '**/*.html',  
+    // options.plugin.fields (string|Array) - field or list of fields to parse with Markdown-It. Defaults to 'contents'
+    fields: ['contents', 'excerpt']  
+    // options.plugin.extension (string) - the file extension for parsed files. Defaults to 'html'
+    extension: 'htm'
+  }
+}));
+```
+
 If you need access to markdown-it directly to enable features or use plugins, you can access the parser directly:
 
 ```js
