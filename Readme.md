@@ -2,7 +2,7 @@
 
 # metalsmith-markdownit
 
-A Metalsmith plugin to convert markdown files using markdown-it library.
+A Metalsmith plugin to convert markdown files using [markdown-it](https://github.com/markdown-it/markdown-it) library.
 
 This plugin is not one to one replacement for metalsmith-markdown. There are slight differences in how the underlying libraries behave, but I find I get better results with markdown-it. Markdown-it, however, does not support all GFM features.
 
@@ -49,13 +49,30 @@ metalsmith.use(markdown('default', {
 }));
 ```
 
+If you want to control plugin behaviour, you can set options under the `plugin` key of the `options` object (these options are not passed to Markdown It):
+
+```js
+metalsmith.use(markdown('default', {
+  typographer: true,
+  html: true,
+  plugin: {
+    // options.plugin.pattern (string) - glob pattern. Defaults to '**/*@(md|markdown)'
+    pattern: '**/*.html',  
+    // options.plugin.fields (string|Array) - field or list of fields to parse with Markdown-It. Defaults to 'contents'
+    fields: ['contents', 'excerpt']  
+    // options.plugin.extension (string) - the file extension for parsed files. Defaults to 'html'
+    extension: 'htm'
+  }
+}));
+```
+
 If you need access to markdown-it directly to enable features or use plugins, you can access the parser directly:
 
 ```js
 var markdown = require('metalsmith-markdownit');
 
 var md = markdown('zero', { html: true });
-md.parser.enable(['embpahsis', 'html_block', 'html_tag']);
+md.parser.enable(['emphasis', 'html_block', 'html_tag']);
 
 metalsmith.use(md);
 ```

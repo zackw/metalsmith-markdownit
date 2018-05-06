@@ -124,4 +124,49 @@ describe('metalsmith-markdown', function(){
         done();
       })
   })
+
+  it('should accept plugin options', function(done){
+    Metalsmith('test/fixtures/plugin-options')
+      .use(markdown({
+        plugin: {
+          pattern: '**/*.html',
+          fields: ['contents', 'excerpt'],
+          extension: 'htm'
+        }
+      }))
+      .use(function(files, metalsmith, done){
+        var f = files['index.htm'];
+        // concat the excerpt into the main content
+        f.contents = f.contents.toString() + '\n' + f.excerpt.toString()
+        done()
+      })
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/plugin-options/expected', 'test/fixtures/plugin-options/build');
+        done();
+      });
+  });
+
+  it('should accept plugin options with a preset', function(done){
+    Metalsmith('test/fixtures/plugin-options-preset')
+      .use(markdown('default', {
+        plugin: {
+          pattern: '**/*.html',
+          fields: ['contents', 'excerpt'],
+          extension: 'htm'
+        }
+      }))
+      .use(function(files, metalsmith, done){
+        var f = files['index.htm'];
+        // concat the excerpt into the main content
+        f.contents = f.contents.toString() + '\n' + f.excerpt.toString()
+        done()
+      })
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/plugin-options-preset/expected', 'test/fixtures/plugin-options/build');
+        done();
+      });
+  });
+
 });
