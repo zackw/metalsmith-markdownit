@@ -6,15 +6,15 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "debug": "~2.2.0",
-    "markdown-it": "^8.0.0",
-    "minimatch": "^3.0.3"
+    "debug": "^3.2.6",
+    "markdown-it": "^8.4.2",
+    "minimatch": "^3.0.4"
   },
   "devDependencies": {
-    "mocha": "2.x",
+    "mocha": "5.x",
     "metalsmith": "2.x",
     "assert-dir-equal": "1.x",
-    "markdown-it-abbr": "^1.0.0"
+    "markdown-it-abbr": "^1.0.4"
   },
   "scripts": {
     "test": "mocha"
