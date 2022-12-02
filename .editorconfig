@@ -1,3 +1,18 @@
-[*.js]
-indent_style = space
+# All files unless overridden: UTF-8, Unix style line endings and
+# final newline, no tabs, 2-space indentation.
+[*]
+charset = utf-8
+end_of_line = lf
 indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Trailing whitespace is significant in Markdown
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefiles must be indented with tabs
+[Makefile]
+indent_size = 8
+indent_style = tab

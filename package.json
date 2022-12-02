@@ -11,12 +11,20 @@
     "micromatch": "^4.0.0"
   },
   "devDependencies": {
-    "mocha": "^10.1.0",
-    "metalsmith": "^2.5.0",
     "assert-dir-equal": "^1.1.0",
-    "markdown-it-abbr": "^1.0.0"
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0",
+    "markdown-it-abbr": "^1.0.0",
+    "metalsmith": "^2.5.0",
+    "mocha": "^10.1.0",
+    "prettier": "^2.7.0"
   },
   "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint --cache --fix lib test",
     "test": "mocha"
   }
 }
